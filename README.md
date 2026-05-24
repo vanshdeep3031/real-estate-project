@@ -163,3 +163,4 @@ DELETE /api/customers/:id → Delete customer
 - **Auth**: JWT
 - **Images**: Cloudinary + Multer
 - **Fonts**: Cormorant Garamond + DM Sans (Google Fonts)
+# real-estate-project
