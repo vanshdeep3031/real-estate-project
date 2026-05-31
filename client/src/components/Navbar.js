@@ -26,10 +26,13 @@ const styles = {
     letterSpacing: "0.1em", textTransform: "uppercase", borderRadius: "2px",
     transition: "all 0.2s",
   },
+  hamburger: { display: "none", flexDirection: "column", gap: "5px", background: "none", border: "none", cursor: "pointer" },
+  bar: { width: "24px", height: "2px", background: "#f5f0e8", display: "block" },
 };
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -38,9 +41,11 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => setOpen(false), [location]);
+
   return (
     <nav style={{ ...styles.nav, ...(scrolled ? styles.navScrolled : styles.navTop) }}>
-      <Link to="/" style={styles.logo}>Dhillon Properties</Link>
+      <Link to="/" style={styles.logo}>LandMark</Link>
       <ul style={styles.links}>
         {[["Home", "/"], ["Properties", "/plots"], ["Contact", "/contact"]].map(([label, path]) => (
           <li key={path}><Link to={path} style={styles.link}>{label}</Link></li>

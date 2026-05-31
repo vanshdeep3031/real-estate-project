@@ -18,9 +18,10 @@ export default function Home() {
         display: "flex", alignItems: "center", justifyContent: "center", textAlign: "center",
         padding: "6rem 5% 4rem", position: "relative", overflow: "hidden",
       }}>
+        {/* Background decoration */}
         <div style={{ position: "absolute", inset: 0, backgroundImage: "radial-gradient(circle at 30% 50%, rgba(201,168,76,0.06) 0%, transparent 60%), radial-gradient(circle at 70% 20%, rgba(201,168,76,0.04) 0%, transparent 50%)" }} />
         <div style={{ position: "relative", maxWidth: "800px" }}>
-          <p style={{ color: "#c9a84c", letterSpacing: "0.3em", fontSize: "0.8rem", textTransform: "uppercase", marginBottom: "1.5rem" }}>Premium Real Estate · Kashipur, Uttarakhand</p>
+          <p style={{ color: "#c9a84c", letterSpacing: "0.3em", fontSize: "0.8rem", textTransform: "uppercase", marginBottom: "1.5rem" }}>Premium Real Estate · Ludhiana, Punjab</p>
           <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(3rem, 7vw, 5.5rem)", color: "#f5f0e8", fontWeight: 600, lineHeight: 1.1, marginBottom: "1.5rem" }}>
             Find Your Perfect<br /><span style={{ color: "#c9a84c" }}>Plot of Land</span>
           </h1>
@@ -29,7 +30,7 @@ export default function Home() {
           </p>
           <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
             <Link to="/plots">
-              <button style={{ background: "#c9a84c", border: "none", color: "#0f0e0c", padding: "14px 36px", fontSize: "0.9rem", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", borderRadius: "2px", cursor: "pointer" }}>
+              <button style={{ background: "#c9a84c", border: "none", color: "#0f0e0c", padding: "14px 36px", fontSize: "0.9rem", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", borderRadius: "2px", cursor: "pointer", transition: "background 0.2s" }}>
                 View All Plots
               </button>
             </Link>
@@ -78,12 +79,12 @@ export default function Home() {
       <section style={{ background: "#0f0e0c", padding: "5rem 5%", color: "#f5f0e8" }}>
         <div style={{ textAlign: "center", marginBottom: "3rem" }}>
           <p style={{ color: "#c9a84c", letterSpacing: "0.2em", fontSize: "0.8rem", textTransform: "uppercase", marginBottom: "0.8rem" }}>Why Us</p>
-          <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "2.8rem" }}>The Dhillon Difference</h2>
+          <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "2.8rem" }}>The LandMark Difference</h2>
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))", gap: "2rem" }}>
           {[
             ["🔒", "Clear Titles", "Every plot comes with verified, dispute-free legal documentation."],
-            ["📍", "Prime Locations", "Strategically located plots in Kashipur with excellent connectivity."],
+            ["📍", "Prime Locations", "Strategically located plots with excellent connectivity."],
             ["💰", "Best Value", "Fair pricing with transparent dealing — no hidden charges."],
             ["🤝", "Trusted Since 2010", "Over a decade of trust and successful transactions."],
           ].map(([icon, title, desc]) => (
@@ -98,4 +99,14 @@ export default function Home() {
 
       {/* CTA */}
       <section style={{ padding: "5rem 5%", textAlign: "center", background: "linear-gradient(135deg, #f5f0e8 0%, #ede7d9 100%)" }}>
-        <h2 style={{ fontFamily: "'Cormorant Garamond', ser
+        <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "2.5rem", marginBottom: "1rem" }}>Interested in a Plot?</h2>
+        <p style={{ color: "#7a7568", marginBottom: "2rem" }}>Get in touch today. We respond within 24 hours.</p>
+        <a href="https://wa.me/919876543210?text=Hi, I'm interested in a plot" target="_blank" rel="noreferrer">
+          <button style={{ background: "#25D366", border: "none", color: "#fff", padding: "14px 36px", fontSize: "0.9rem", fontWeight: 600, borderRadius: "2px", cursor: "pointer", letterSpacing: "0.05em" }}>
+            💬 Chat on WhatsApp
+          </button>
+        </a>
+      </section>
+    </div>
+  );
+}
