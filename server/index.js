@@ -8,7 +8,7 @@ dotenv.config();
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(cors({ origin: "https://real-estate-project-5m7togjik-vanshdeep-s-projects.vercel.app" }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
