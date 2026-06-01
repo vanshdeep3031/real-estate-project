@@ -7,7 +7,7 @@ export default function Contact() {
         <p style={{ color: "#c9a84c", letterSpacing: "0.2em", fontSize: "0.8rem", textTransform: "uppercase", marginBottom: "0.8rem" }}>We're Here</p>
         <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "3rem" }}>Get In Touch</h1>
       </div>
-      <div style={{ padding: "4rem 5%", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "4rem", maxWidth: "1000px", margin: "0 auto" }}>
+      <div className="grid-responsive-2col" style={{ padding: "4rem 5%", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "4rem", maxWidth: "1000px", margin: "0 auto" }}>
         <div>
           <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "2rem", marginBottom: "1.5rem" }}>Contact Information</h2>
           {[

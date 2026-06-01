@@ -1,32 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 
-const styles = {
-  nav: {
-    position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
-    display: "flex", alignItems: "center", justifyContent: "space-between",
-    padding: "0 5%", height: "70px", transition: "all 0.3s ease",
-  },
-  navScrolled: {
-    background: "rgba(15,14,12,0.97)", backdropFilter: "blur(10px)",
-    boxShadow: "0 2px 20px rgba(0,0,0,0.3)",
-  },
-  navTop: { background: "transparent" },
-  logo: {
-    fontFamily: "'Cormorant Garamond', serif",
-    fontSize: "1.6rem", fontWeight: 700, color: "#c9a84c", letterSpacing: "0.02em",
-  },
-  links: { display: "flex", gap: "2rem", alignItems: "center", listStyle: "none" },
-  link: { color: "#f5f0e8", fontSize: "0.9rem", letterSpacing: "0.08em", textTransform: "uppercase", opacity: 0.85 },
-  adminBtn: {
-    background: "transparent", border: "1px solid #c9a84c",
-    color: "#c9a84c", padding: "8px 20px", fontSize: "0.78rem",
-    letterSpacing: "0.1em", textTransform: "uppercase", borderRadius: "2px",
-  },
-};
-
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -35,17 +12,97 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Auto-close mobile drawer when location/url path changes
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [location]);
+
   return (
-    <nav style={{ ...styles.nav, ...(scrolled ? styles.navScrolled : styles.navTop) }}>
-      <Link to="/" style={styles.logo}>Dhillon Properties</Link>
-      <ul style={styles.links}>
+    <nav style={{
+      position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
+      display: "flex", alignItems: "center", justifyContent: "space-between",
+      padding: "0 5%", height: "70px", transition: "all 0.3s ease",
+      background: scrolled || mobileOpen ? "rgba(15,14,12,0.97)" : "transparent",
+      backdropFilter: scrolled || mobileOpen ? "blur(10px)" : "none",
+      boxShadow: scrolled || mobileOpen ? "0 2px 20px rgba(0,0,0,0.3)" : "none",
+    }}>
+      <Link to="/" style={{
+        fontFamily: "'Cormorant Garamond', serif",
+        fontSize: "1.6rem", fontWeight: 700, color: "#c9a84c", letterSpacing: "0.02em",
+      }}>
+        Dhillon Properties
+      </Link>
+
+      {/* Desktop navigation menu */}
+      <ul className="nav-menu-desktop" style={{
+        display: "flex", gap: "2rem", alignItems: "center", listStyle: "none", margin: 0, padding: 0
+      }}>
         {[["Home", "/"], ["Properties", "/plots"], ["Contact", "/contact"]].map(([label, path]) => (
-          <li key={path}><Link to={path} style={styles.link}>{label}</Link></li>
+          <li key={path}>
+            <Link to={path} style={{
+              color: "#f5f0e8", fontSize: "0.9rem", letterSpacing: "0.08em",
+              textTransform: "uppercase", opacity: 0.85, transition: "color 0.25s"
+            }}
+              onMouseEnter={e => e.target.style.color = "#c9a84c"}
+              onMouseLeave={e => e.target.style.color = "#f5f0e8"}
+            >
+              {label}
+            </Link>
+          </li>
         ))}
         <li>
-          <Link to="/admin"><button style={styles.adminBtn}>Admin</button></Link>
+          <Link to="/admin">
+            <button style={{
+              background: "transparent", border: "1px solid #c9a84c",
+              color: "#c9a84c", padding: "8px 20px", fontSize: "0.78rem",
+              letterSpacing: "0.1em", textTransform: "uppercase", borderRadius: "2px",
+              cursor: "pointer", transition: "all 0.25s"
+            }}
+              onMouseEnter={e => { e.target.style.background = "#c9a84c"; e.target.style.color = "#0f0e0c"; }}
+              onMouseLeave={e => { e.target.style.background = "transparent"; e.target.style.color = "#c9a84c"; }}
+            >
+              Admin
+            </button>
+          </Link>
         </li>
       </ul>
+
+      {/* Hamburger icon button (Mobile only) */}
+      <button onClick={() => setMobileOpen(!mobileOpen)} className="nav-toggle-mobile" style={{
+        background: "none", border: "none", color: "#f5f0e8", fontSize: "1.8rem", cursor: "pointer", padding: "8px"
+      }}>
+        {mobileOpen ? "✕" : "☰"}
+      </button>
+
+      {/* Mobile Drawer Menu Overlay */}
+      {mobileOpen && (
+        <div style={{
+          position: "fixed", top: "70px", left: 0, right: 0,
+          background: "#0f0e0c", display: "flex", flexDirection: "column",
+          padding: "2rem 8%", gap: "1.5rem", borderTop: "1px solid rgba(255,255,255,0.06)",
+          boxShadow: "0 10px 25px rgba(0,0,0,0.5)", zIndex: 99,
+          animation: "fadeIn 0.2s ease-out"
+        }}>
+          {[["Home", "/"], ["Properties", "/plots"], ["Contact", "/contact"]].map(([label, path]) => (
+            <Link key={path} to={path} style={{
+              color: "#f5f0e8", fontSize: "1.1rem", letterSpacing: "0.08em",
+              textTransform: "uppercase", padding: "0.5rem 0", borderBottom: "1px solid rgba(255,255,255,0.03)"
+            }}>
+              {label}
+            </Link>
+          ))}
+          <Link to="/admin" style={{ marginTop: "1rem" }}>
+            <button style={{
+              background: "#c9a84c", border: "none", color: "#0f0e0c",
+              padding: "12px", width: "100%", fontSize: "0.9rem",
+              fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", borderRadius: "2px",
+              cursor: "pointer"
+            }}>
+              Admin Panel
+            </button>
+          </Link>
+        </div>
+      )}
     </nav>
   );
 }

@@ -41,3 +41,93 @@ input, select, textarea {
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--cream-2); }
 ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+
+/* ==========================================================================
+   Responsive Styling & Mobile Optimization
+   ========================================================================== */
+
+/* Public Navigation */
+.nav-menu-desktop {
+  display: flex !important;
+}
+.nav-toggle-mobile {
+  display: none !important;
+}
+
+@media (max-width: 768px) {
+  /* Public Navbar Mobile Toggle */
+  .nav-menu-desktop {
+    display: none !important;
+  }
+  .nav-toggle-mobile {
+    display: block !important;
+  }
+
+  /* Grid columns responsive stacking (Details & Contact) */
+  .grid-responsive-2col {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+    padding: 1.5rem 5% !important;
+  }
+  
+  .detail-main-img {
+    height: clamp(220px, 35vh, 280px) !important;
+  }
+
+  /* Admin panel layout optimization for mobile */
+  .admin-container {
+    flex-direction: column !important;
+  }
+  
+  .admin-sidebar {
+    width: 100% !important;
+    min-height: auto !important;
+    height: auto !important;
+    border-bottom: 2px solid rgba(201,168,76,0.2) !important;
+  }
+  
+  .admin-sidebar-header {
+    display: none !important;
+  }
+  
+  .admin-sidebar-nav {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-around !important;
+    padding: 0.5rem 0 !important;
+  }
+  
+  .admin-sidebar-nav a {
+    padding: 0.6rem 1rem !important;
+    font-size: 0.85rem !important;
+    border-left: none !important;
+    border-bottom: 2px solid transparent !important;
+    gap: 0.4rem !important;
+  }
+  
+  .admin-sidebar-nav a[style*="borderLeft"] {
+    border-bottom: 2px solid var(--gold) !important;
+  }
+  
+  .admin-sidebar-footer {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 0.6rem 1rem !important;
+    border-top: 1px solid rgba(255,255,255,0.05) !important;
+  }
+  
+  .admin-sidebar-footer p {
+    margin-bottom: 0 !important;
+  }
+  
+  .admin-sidebar-footer button {
+    width: auto !important;
+    padding: 6px 16px !important;
+  }
+  
+  .admin-main {
+    padding: 1.5rem 1rem !important;
+  }
+}

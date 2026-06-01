@@ -28,11 +28,11 @@ export default function PlotDetail() {
         <span style={{ color: "#c9a84c" }}>{plot.title}</span>
       </div>
 
-      <div style={{ padding: "3rem 5%", display: "grid", gridTemplateColumns: "1fr 380px", gap: "3rem", maxWidth: "1200px", margin: "0 auto" }}>
+      <div className="grid-responsive-2col" style={{ padding: "3rem 5%", display: "grid", gridTemplateColumns: "1fr 380px", gap: "3rem", maxWidth: "1200px", margin: "0 auto" }}>
         {/* Left: Images + Details */}
         <div>
           {/* Main image */}
-          <div style={{ height: "400px", background: "#e8e4dc", borderRadius: "4px", overflow: "hidden", marginBottom: "1rem" }}>
+          <div className="detail-main-img" style={{ height: "400px", background: "#e8e4dc", borderRadius: "4px", overflow: "hidden", marginBottom: "1rem" }}>
             {plot.images?.[activeImg] ? (
               <img src={plot.images[activeImg]} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
             ) : (
