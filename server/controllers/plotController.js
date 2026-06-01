@@ -1,5 +1,6 @@
 const Plot = require("../models/Plot");
-const { cloudinary } = require("../middleware/upload");
+const { cloudinary: cloudinaryModule } = require("../middleware/upload");
+const cloudinary = cloudinaryModule.v2;
 
 exports.getPlots = async (req, res) => {
   try {
