@@ -34,7 +34,7 @@ exports.getPlot = async (req, res) => {
 
 exports.createPlot = async (req, res) => {
   try {
-    const images = req.files ? req.files.map((f) => f.path) : [];
+    const images = req.files ? req.files.map((f) => f.secure_url || f.url || f.path) : [];
     const plot = await Plot.create({ ...req.body, images });
     res.status(201).json(plot);
   } catch (err) {
@@ -46,7 +46,7 @@ exports.updatePlot = async (req, res) => {
   try {
     const plot = await Plot.findById(req.params.id);
     if (!plot) return res.status(404).json({ message: "Plot not found" });
-    const newImages = req.files ? req.files.map((f) => f.path) : [];
+    const newImages = req.files ? req.files.map((f) => f.secure_url || f.url || f.path) : [];
     const keepImages = req.body.keepImages ? JSON.parse(req.body.keepImages) : plot.images;
     const updated = await Plot.findByIdAndUpdate(
       req.params.id,
