@@ -9,9 +9,17 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: "https://real-estate-project-five-omega.vercel.app",
+  origin: (origin, callback) => {
+    // Allow requests with no origin (like mobile apps, curl, postman)
+    if (!origin) return callback(null, true);
+    if (origin.startsWith("http://localhost:") || origin === "https://real-estate-project-five-omega.vercel.app") {
+      return callback(null, true);
+    }
+    return callback(new Error("Not allowed by CORS"));
+  },
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

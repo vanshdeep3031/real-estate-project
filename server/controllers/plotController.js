@@ -63,11 +63,25 @@ exports.deletePlot = async (req, res) => {
   try {
     const plot = await Plot.findById(req.params.id);
     if (!plot) return res.status(404).json({ message: "Plot not found" });
-    for (const imgUrl of plot.images) {
-      const publicId = imgUrl.split("/").slice(-2).join("/").split(".")[0];
-      await cloudinary.uploader.destroy(publicId).catch(() => {});
+
+    // Safely delete Cloudinary images if they exist
+    if (plot.images && Array.isArray(plot.images)) {
+      for (const imgUrl of plot.images) {
+        if (imgUrl && typeof imgUrl === "string") {
+          try {
+            const parts = imgUrl.split("/");
+            if (parts.length >= 2) {
+              const publicId = parts.slice(-2).join("/").split(".")[0];
+              await cloudinary.uploader.destroy(publicId).catch(() => {});
+            }
+          } catch (cloudinaryErr) {
+            console.error("Cloudinary destroy failed:", cloudinaryErr);
+          }
+        }
+      }
     }
-    await plot.deleteOne();
+
+    await Plot.findByIdAndDelete(req.params.id);
     res.json({ message: "Plot deleted successfully" });
   } catch (err) {
     res.status(500).json({ message: err.message });

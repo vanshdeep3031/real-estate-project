@@ -13,6 +13,64 @@ const labelStyle = {
   letterSpacing: "0.06em", textTransform: "uppercase", color: "#7a7568", marginBottom: "0.4rem",
 };
 
+// Helper to compress images using HTML Canvas before upload
+const compressImage = (file, maxWidth = 1200, maxHeight = 1200, quality = 0.7) => {
+  return new Promise((resolve) => {
+    // Only compress image files
+    if (!file.type.startsWith("image/")) {
+      resolve(file);
+      return;
+    }
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = (event) => {
+      const img = new Image();
+      img.src = event.target.result;
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+        let width = img.width;
+        let height = img.height;
+
+        if (width > height) {
+          if (width > maxWidth) {
+            height = Math.round((height * maxWidth) / width);
+            width = maxWidth;
+          }
+        } else {
+          if (height > maxHeight) {
+            width = Math.round((width * maxHeight) / height);
+            height = maxHeight;
+          }
+        }
+
+        canvas.width = width;
+        canvas.height = height;
+
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0, width, height);
+
+        canvas.toBlob(
+          (blob) => {
+            if (!blob) {
+              resolve(file);
+              return;
+            }
+            const compressedFile = new File([blob], file.name.replace(/\.[^/.]+$/, "") + ".jpg", {
+              type: "image/jpeg",
+              lastModified: Date.now(),
+            });
+            resolve(compressedFile);
+          },
+          "image/jpeg",
+          quality
+        );
+      };
+      img.onerror = () => resolve(file);
+    };
+    reader.onerror = () => resolve(file);
+  });
+};
+
 export default function AdminPlotForm() {
   const { id } = useParams();
   const isEdit = Boolean(id);
@@ -42,10 +100,24 @@ export default function AdminPlotForm() {
     setForm(f => ({ ...f, [name]: type === "checkbox" ? checked : value }));
   };
 
-  const handleFiles = e => {
+  const handleFiles = async (e) => {
     const selected = Array.from(e.target.files);
-    setFiles(selected);
+    if (selected.length === 0) return;
+
+    // Show previews immediately using original files so the UI is responsive
     setPreviews(selected.map(f => URL.createObjectURL(f)));
+
+    const loadingToast = toast.loading("Compressing and optimizing images...");
+    try {
+      const compressedFiles = await Promise.all(
+        selected.map(file => compressImage(file))
+      );
+      setFiles(compressedFiles);
+      toast.success("Images compressed and ready!", { id: loadingToast });
+    } catch (err) {
+      setFiles(selected);
+      toast.error("Failed to compress some images, using originals", { id: loadingToast });
+    }
   };
 
   const removeExistingImage = (url) => {
