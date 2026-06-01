@@ -88,9 +88,8 @@ export default function Home() {
             marginBottom: "2rem",
             letterSpacing: "-0.01em",
           }}>
-            Welcome to <br />
             <span className="text-gold-gradient text-gold-highlight" style={{
-              fontSize: "clamp(3.8rem, 9vw, 7.5rem)",
+              fontSize: "clamp(4.2rem, 11vw, 8.5rem)",
               fontFamily: "'Cormorant Garamond', serif",
               letterSpacing: "0.02em",
             }}>
@@ -98,8 +97,8 @@ export default function Home() {
             </span>
             <br />
             <span style={{
-              letterSpacing: "0.15em",
-              fontSize: "clamp(1.5rem, 4vw, 3rem)",
+              letterSpacing: "0.18em",
+              fontSize: "clamp(1.8rem, 5vw, 3.5rem)",
               fontWeight: 300,
               color: "#ede7d9",
               opacity: 0.95,
