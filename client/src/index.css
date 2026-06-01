@@ -131,3 +131,95 @@ input, select, textarea {
     padding: 1.5rem 1rem !important;
   }
 }
+
+/* ==========================================================================
+   Premium Luxury Animations & Visual FX
+   ========================================================================= */
+
+@keyframes pulseGlow {
+  0%, 100% { transform: scale(1) translate(0, 0); opacity: 0.15; }
+  33% { transform: scale(1.15) translate(40px, -20px); opacity: 0.22; }
+  66% { transform: scale(0.9) translate(-20px, 30px); opacity: 0.12; }
+}
+
+@keyframes floatElement {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-12px) rotate(3deg); }
+}
+
+@keyframes shineSweep {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+@keyframes textReveal {
+  0% { transform: translateY(30px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+.animate-glow-1 {
+  animation: pulseGlow 15s infinite ease-in-out;
+}
+
+.animate-glow-2 {
+  animation: pulseGlow 20s infinite ease-in-out reverse;
+}
+
+.animate-float {
+  animation: floatElement 6s infinite ease-in-out;
+}
+
+/* Metallic button shine */
+.btn-premium-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-premium-shine::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  transform: skewX(-20deg);
+  transition: none;
+}
+
+.btn-premium-shine:hover::after {
+  animation: shineSweep 0.8s ease-in-out forwards;
+}
+
+/* Gold Highlight text */
+.text-gold-gradient {
+  background: linear-gradient(135deg, #f5f0e8 0%, #e5c060 50%, #c9a84c 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gold-highlight {
+  color: #c9a84c;
+  text-shadow: 0 0 25px rgba(201, 168, 76, 0.45);
+  font-weight: 700;
+}
+
+.reveal-1 {
+  animation: textReveal 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.reveal-2 {
+  opacity: 0;
+  animation: textReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+}
+
+.reveal-3 {
+  opacity: 0;
+  animation: textReveal 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards;
+}
