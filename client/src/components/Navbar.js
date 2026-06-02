@@ -50,21 +50,6 @@ export default function Navbar() {
             </Link>
           </li>
         ))}
-        <li>
-          <Link to="/admin">
-            <button style={{
-              background: "transparent", border: "1px solid #c9a84c",
-              color: "#c9a84c", padding: "8px 20px", fontSize: "0.78rem",
-              letterSpacing: "0.1em", textTransform: "uppercase", borderRadius: "2px",
-              cursor: "pointer", transition: "all 0.25s"
-            }}
-              onMouseEnter={e => { e.target.style.background = "#c9a84c"; e.target.style.color = "#0f0e0c"; }}
-              onMouseLeave={e => { e.target.style.background = "transparent"; e.target.style.color = "#c9a84c"; }}
-            >
-              Admin
-            </button>
-          </Link>
-        </li>
       </ul>
 
       {/* Hamburger icon button (Mobile only) */}
@@ -91,16 +76,6 @@ export default function Navbar() {
               {label}
             </Link>
           ))}
-          <Link to="/admin" style={{ marginTop: "1rem" }}>
-            <button style={{
-              background: "#c9a84c", border: "none", color: "#0f0e0c",
-              padding: "12px", width: "100%", fontSize: "0.9rem",
-              fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", borderRadius: "2px",
-              cursor: "pointer"
-            }}>
-              Admin Panel
-            </button>
-          </Link>
         </div>
       )}
     </nav>
