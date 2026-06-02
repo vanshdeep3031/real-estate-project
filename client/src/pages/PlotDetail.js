@@ -79,12 +79,12 @@ export default function PlotDetail() {
             </p>
             <p style={{ color: "#7a7568", fontSize: "0.85rem", marginBottom: "2rem" }}>Size: {plot.size}</p>
 
-            <a href={`https://wa.me/919876543210?text=${whatsappMsg}`} target="_blank" rel="noreferrer" style={{ display: "block" }}>
+            <a href={`https://wa.me/919012788331?text=${whatsappMsg}`} target="_blank" rel="noreferrer" style={{ display: "block" }}>
               <button style={{ width: "100%", background: "#25D366", border: "none", color: "#fff", padding: "14px", fontWeight: 600, fontSize: "1rem", borderRadius: "2px", cursor: "pointer", marginBottom: "0.8rem" }}>
                 💬 WhatsApp Enquiry
               </button>
             </a>
-            <a href="tel:+919876543210" style={{ display: "block" }}>
+            <a href="tel:+919012788331" style={{ display: "block" }}>
               <button style={{ width: "100%", background: "transparent", border: "2px solid #c9a84c", color: "#c9a84c", padding: "12px", fontWeight: 600, fontSize: "0.9rem", borderRadius: "2px", cursor: "pointer" }}>
                 📞 Call Now
               </button>
